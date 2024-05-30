@@ -1,0 +1,10 @@
+*{
+    box-sizing: border-box;
+}
+.title{
+    color: orchid;
+    font-size: 80px;
+}
+.change{
+    color: orange;
+}
