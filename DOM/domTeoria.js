@@ -66,5 +66,4 @@
 // Agregar el nuevo elemento al cuerpo del documento
     document.body.appendChild(newElement); 
  
-
 */
