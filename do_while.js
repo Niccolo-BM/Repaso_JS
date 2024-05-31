@@ -33,50 +33,50 @@
     2. tabla de multiplicar de x del 1 -10
 ) */
 
-let menu = "";
+// let menu = "";
 
-do{
-    menu = prompt(`
-    Opciones:
-    1. sumar
-    2. multiplicar
-    3. salir  
+// do{
+//     menu = prompt(`
+//     Opciones:
+//     1. sumar
+//     2. multiplicar
+//     3. salir  
     
-    opcion:
-    `)
-    switch (menu) {
-        case "1":
-            let num1 = Number(prompt("Ingrese un numero: "))
-            let num2 = Number(prompt("Ingrese otro numero:"))
-            alert (`la suma de ${num1+num2}`)
+//     opcion:
+//     `)
+//     switch (menu) {
+//         case "1":
+//             let num1 = Number(prompt("Ingrese un numero: "))
+//             let num2 = Number(prompt("Ingrese otro numero:"))
+//             alert (`la suma de ${num1+num2}`)
         
-        break;
+//         break;
 
-        case "2":
-            let num = prompt("De que numero queires tabla? ")
-            num = Number(num);
+//         case "2":
+//             let num = prompt("De que numero queires tabla? ")
+//             num = Number(num);
 
-            let result = "tabla del  " + num + "\n";
+//             let result = "tabla del  " + num + "\n";
 
-            for (let i = 1; i <= 10; i++) {
-                result  += `${num} x ${i} = ${num * i} \n`  
-            }      
-            alert(result)
-        break;
+//             for (let i = 1; i <= 10; i++) {
+//                 result  += `${num} x ${i} = ${num * i} \n`  
+//             }      
+//             alert(result)
+//         break;
 
-        case "3":
-            alert("vemos")
-        break;
+//         case "3":
+//             alert("vemos")
+//         break;
 
-        default:("Opcion invalida")
-}
-
-
-} while (menu != "3")
+//         default:("Opcion invalida")
+// }
 
 
+// } while (menu != "3")
 
-1
+
+
+
 
 
 
