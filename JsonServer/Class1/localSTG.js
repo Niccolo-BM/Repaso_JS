@@ -1,7 +1,8 @@
+
 // localStorage (Almacenamiento local en Navegador, sera permanente siempre y cuando no lo borre o desinstale el programa)
 
 import { URL_USER } from "./data/route.js"
-import { get, post } from "./services/fetchPetition.js"
+import { get, post } from "../services/fetchPetition.js"
 
 
 

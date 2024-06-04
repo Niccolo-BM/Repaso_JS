@@ -1,0 +1,1 @@
+// Contiene toda la logica de peticiones a la base de datos(.Json) 
