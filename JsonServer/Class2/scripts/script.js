@@ -33,7 +33,6 @@ function empty(valor){
     }
     return false;
 }
-
 function isAge(age){
     if (age > 0 && age < 80){
         return true;
