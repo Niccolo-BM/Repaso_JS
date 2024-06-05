@@ -52,7 +52,6 @@ function insert() {
         paintUsers();
 }
 
-
 function empty(valor){
     /* para que no se almacene sin digitan ninguna info */
     if(valor == ""){
