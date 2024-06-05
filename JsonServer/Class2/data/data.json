@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": 3,
+      "name": "Catalina",
+      "age": 29
+    },
+    {
+      "id": 4,
+      "name": "Juan",
+      "age": 9
+    },
+    {
+      "id": 5,
+      "name": "Noah",
+      "age": 0
+    },
+    {
+      "id": 6,
+      "name": "Manchas",
+      "age": 5
+    },
+    {
+      "id": "024d",
+      "name": "Zoe",
+      "age": "1"
+    },
+    {
+      "id": "3197",
+      "name": "Latte",
+      "age": "5"
+    }
+  ]
+}

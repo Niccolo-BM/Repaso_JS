@@ -1,3 +1,6 @@
+import { URL_USER } from "../services/routes.js";
+import { get, post } from "../services/services.js";
+
 const nameInput = document.getElementById("name");
 const ageInput = document.getElementById("age");
 const form = document.querySelector("form");
@@ -5,11 +8,19 @@ const form = document.querySelector("form");
 const tableUser = document.querySelector(".tableUser");
 const tableBody = tableUser.querySelector("tbody");
 /* Buscando elementos en concreto */
+const contentTable = document.querySelector(".contentTable");
+
+
+// EVENTOS
+/* para refrescar la pagina un F5 */
+document.addEventListener("DOMContentLoaded", paintUsers)
 
 form.addEventListener("submit",(event) => {
     event.preventDefault();
     insert();
 })
+
+// FUNCIONES
 function insert() {       
         const name = nameInput.value;
         const age = ageInput.value;
@@ -17,8 +28,12 @@ function insert() {
         if  (empty(name) || !isAge(age)) {
             return;
         }
-
-        console.log("nombre: " +name+ " Edad :"+ age);
+        // esto ya permite ingresar datos en la pagina, se vean y se gaurden la BD
+        const data = {name,age}
+         /* "name": name,
+            "age": age,
+        } */
+        post(URL_USER, data)
 }
 function empty(valor){
     /* para que no se almacene sin digitan ninguna info */
@@ -43,3 +58,41 @@ function isAge(age){
     }
         return false;   
 }
+async function paintUsers() {
+    /* info que devuelve la basde de datos */
+
+const users = await get(URL_USER); // Se definen los usuarios y se importa la optencion de la info pedida en archivo services.js y luego se impota en ()los usuarios 
+    users.forEach((user) => {   
+            /* Forma larga pero sin psobles errores */
+        const tr = document.createElement("tr");
+        const tdId = document.createElement("td");
+        const tdName = document.createElement("td");
+        const tdAge = document.createElement("td");
+            
+        tdId.textContent = user["id"]/* 02 */
+        tdName.textContent = user["name"]/* Catalina */
+        tdAge.textContent = user["age"]/* 29 */
+            
+        tr.appendChild(tdId);
+        tr.appendChild(tdName);
+        tr.appendChild(tdAge);
+
+        contentTable.appendChild(tr);
+        });
+};
+
+
+/* Forma corta pero con posibles errores */
+
+
+// const users = JSON.parse(localStorage.getItem("users")) || [];
+// users.forEach((user) => {
+    //     const tr = document.createElement("tr");
+//     const tdName = document.createElement("td");
+//     const tdAge = document.createElement("td");
+//     tdName.textContent = user.name;
+//     tdAge.textContent = user.age;
+//     tr.appendChild(tdName);
+//     tr.appendChild(tdAge);
+//     tableBody.appendChild(tr);
+// };
