@@ -1,5 +1,6 @@
 import { URL_USER } from "../services/routes.js";
-import { get, post } from "../services/services.js";
+/* SE IMPORTA TODA FUNCION CREADA DEL ARCHIVO.JS */
+import { get, post , deleteById, putById} from "../services/services.js";
 
 const nameInput = document.getElementById("name");
 const ageInput = document.getElementById("age");
@@ -10,7 +11,8 @@ const tableBody = tableUser.querySelector("tbody");
 /* Buscando elementos en concreto */
 const contentTable = document.querySelector(".contentTable");
 
-
+const btnAdd = document.querySelector(".btnAdd");
+const modalTitle =document.querySelector(".modal-title");
 // EVENTOS
 /* para refrescar la pagina un F5 */
 document.addEventListener("DOMContentLoaded", paintUsers)
@@ -18,6 +20,12 @@ document.addEventListener("DOMContentLoaded", paintUsers)
 form.addEventListener("submit",(event) => {
     event.preventDefault();
     insert();
+})
+
+btnAdd.addEventListener("click", () => {
+   form.reset();
+   form.setAttribute("data-status","add");
+   modalTitle.textContent = "Agregando un nuevo usuario"
 })
 
 // FUNCIONES
@@ -33,8 +41,18 @@ function insert() {
          /* "name": name,
             "age": age,
         } */
-        post(URL_USER, data)
+        
+        if (form.getAttribute("data-status" ) == "add") {
+              post (URL_USER, data);
+        } else if (form.getAttribute("data-status" ) == "edit"){
+            putById(URL_USER, form.getAttribute("data-id"), data);
+        }
+
+        form.reset();
+        paintUsers();
 }
+
+
 function empty(valor){
     /* para que no se almacene sin digitan ninguna info */
     if(valor == ""){
@@ -68,15 +86,42 @@ const users = await get(URL_USER); // Se definen los usuarios y se importa la op
         const tdId = document.createElement("td");
         const tdName = document.createElement("td");
         const tdAge = document.createElement("td");
-            
+        const tdActions = document.createElement("td");
+        const btnDelete = document.createElement("button");
+        const btnEdit = document.createElement("button");
+        
+        btnDelete.classList = "btn btn-danger me-2"    
+        btnEdit.classList = "btn btn-warning"    
+        
+        btnEdit.setAttribute("data-bs-toggle", "modal"),
+        btnEdit.setAttribute("data-bs-target", "#exampleModal"),
+
+
+        btnDelete.textContent = "Delete";
+        btnEdit.textContent = "Edit";
         tdId.textContent = user["id"]/* 02 */
         tdName.textContent = user["name"]/* Catalina */
         tdAge.textContent = user["age"]/* 29 */
-            
-        tr.appendChild(tdId);
-        tr.appendChild(tdName);
-        tr.appendChild(tdAge);
+          
+        tdActions.append(btnDelete, btnEdit);
+        tr.append(tdId, tdName, tdAge, tdActions);
 
+        /* funcion del boton borrar */
+        btnDelete.addEventListener("click", ()=>{
+            deleteById(URL_USER, user["id"])
+        })
+
+        /* funcion del poton editar */
+        btnEdit.addEventListener("click", () => {
+            form.setAttribute("data-status","edit");
+            form.setAttribute("data-id", user["id"]);
+            modalTitle.textContent = "Editando Usuario"
+
+            nameInput.value = user["name"];
+            ageInput.value = user["age"];
+         })
+
+        
         contentTable.appendChild(tr);
         });
 };
